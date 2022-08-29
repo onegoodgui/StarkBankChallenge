@@ -1,7 +1,7 @@
 import { invoiceBuilder } from "../utils/invoiceUtils.js";
+import axios from "axios";
 import { Person } from "../utils/userUtils.js";
 import { faker } from "@faker-js/faker";
-import axios from "axios";
 
 async function invoiceGenerator() {
   let i = Math.floor(Math.random() * 5);
@@ -22,19 +22,23 @@ async function invoiceGenerator() {
       console.error(err);
     }
   }
+  console.log("foi");
 }
 
 async function invoiceSender(interval: number, limit: number) {
   invoiceGenerator();
-  let time = interval;
-  if (time <= limit) {
-    setTimeout(invoiceGenerator, interval);
-    setTimeout(() => {
-      time = time + interval;
-    }, interval);
-  } else {
-    return;
-  }
+  let timesUp = false;
+
+  setTimeout(() => {
+    return (timesUp = true);
+  }, limit);
+
+  const refreshId = setInterval(() => {
+    if (timesUp) {
+      clearInterval(refreshId);
+    }
+    invoiceGenerator();
+  }, interval);
 }
 
 export { invoiceSender };

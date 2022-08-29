@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "module": "es6",
+    "module": "ES2022",
     "moduleResolution": "node",
     "outDir": "dist",
     "rootDirs": ["src"],
     "baseUrl": "src",
+    "target": "ES2017",
     "paths": {
       "@/*": ["*"]
     }
