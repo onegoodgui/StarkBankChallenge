@@ -63,6 +63,9 @@ npm run start
 
 <ul>
   <li>
-    <b> POST </b> "/invoice/send" --> Send invoices for random people in 3h intervals during 24h.
+    <b> POST </b> "/invoice/send" --> sends invoices for random people in 3h intervals during 24h.
+  </li>
+   <li>
+    <b> POST </b> "/" --> endpoint that receives the invoice payments webhook callbacks. It is automatically used when running the server.
   </li>
 </ul>
