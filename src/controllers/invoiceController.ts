@@ -11,7 +11,7 @@ async function sendInvoice(req: Request, res: Response) {
     res.status(serviceErrorToStatusCode[ans.type]).send(ans.message);
     return;
   }
-  const [interval, limit] = [1000 * 60 * 60 * 3, 1000 * 60 * 60 * 24];
+  const [interval, limit] = [1000 * 60 * 1, 1000 * 60 * 1];
   await invoiceSender(interval, limit);
 
   res.sendStatus(200);

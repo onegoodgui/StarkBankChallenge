@@ -25,12 +25,12 @@ async function invoiceGenerator() {
       console.error(err);
     }
   }
-  console.log("foi");
 }
 
 async function invoiceSender(interval: number, limit: number) {
   invoiceGenerator();
   let timesUp = false;
+  console.log("process running");
 
   setTimeout(() => {
     return (timesUp = true);
@@ -38,6 +38,7 @@ async function invoiceSender(interval: number, limit: number) {
 
   const refreshId = setInterval(() => {
     if (timesUp) {
+      console.log("process ended");
       clearInterval(refreshId);
     }
     invoiceGenerator();

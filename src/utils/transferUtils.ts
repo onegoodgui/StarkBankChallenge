@@ -23,9 +23,7 @@ async function transferBuilder(webhook: any) {
     },
   ]);
   for await (let transfer of transfers) {
-    if (transfer.id === webhook.id) {
-      return transfer;
-    }
+    return transfer;
   }
 }
 
