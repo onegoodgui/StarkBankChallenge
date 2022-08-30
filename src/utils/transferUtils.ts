@@ -3,8 +3,6 @@ import { redisClient } from "../config/redisConfig.js";
 import { v4 as uuid } from "uuid";
 
 async function transferBuilder(webhook: any) {
-  console.log(webhook);
-  console.log(await redisClient.hVals("id"));
   if (webhook.status === "created") {
     return false;
   }

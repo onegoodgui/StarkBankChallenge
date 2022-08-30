@@ -10,6 +10,7 @@ export async function connectRedis() {
     url: process.env.REDIS_URL,
   });
   await redisClient.connect();
+  await redisClient.del("funcStart");
 }
 
 export async function disconnectRedis() {

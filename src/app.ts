@@ -2,7 +2,8 @@ import express, { Express } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import router from "./routers/index.js";
-import errorHandlerMiddleware from "./middlewares/errorHandlerMiddleware.js";
+import "express-async-errors";
+
 import { connectRedis } from "./config/redisConfig.js";
 import { webhookConfig } from "./services/webhookService.js";
 
@@ -11,7 +12,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.raw({ type: "*/*" }));
-app.use(errorHandlerMiddleware);
+
 app.use(router);
 
 await webhookConfig("ngrok");

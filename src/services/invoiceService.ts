@@ -1,5 +1,8 @@
-import { invoiceBuilder } from "../utils/invoiceUtils.js";
+import { invoiceBuilder, processStatus } from "../utils/invoiceUtils.js";
+import { serviceErrorToStatusCode } from "../utils/errorUtils.js";
 import axios from "axios";
+import { Response } from "express";
+import { errorTypes } from "../utils/errorUtils.js";
 import { Person } from "../utils/userUtils.js";
 import { faker } from "@faker-js/faker";
 
@@ -41,4 +44,18 @@ async function invoiceSender(interval: number, limit: number) {
   }, interval);
 }
 
-export { invoiceSender };
+async function invoiceSenderStatus(res: Response) {
+  const status = await processStatus();
+  try {
+    if (status === "starting") {
+      return true;
+    } else {
+      throw errorTypes.tooEarly(status);
+    }
+  } catch (err) {
+    res.status(serviceErrorToStatusCode[err.type]).send(err.message);
+    return false;
+  }
+}
+
+export { invoiceSender, invoiceSenderStatus };

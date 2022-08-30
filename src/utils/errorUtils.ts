@@ -1,8 +1,11 @@
+import { custom } from "joi";
+
 export const serviceErrorToStatusCode = {
   unauthorized: 401,
   notFound: 404,
   conflict: 409,
   unprocessableEntity: 422,
+  tooEarly: 425,
 };
 
 function unauthorizedError(customMessage?: string) {
@@ -33,9 +36,17 @@ function unprocessableEntityError(customMessage?: string) {
   };
 }
 
+function tooEarly(customMessage?: string) {
+  return {
+    type: "tooEarly",
+    message: customMessage ? customMessage : "Too Early",
+  };
+}
+
 export const errorTypes = {
   unauthorizedError,
   conflictError,
   notFoundError,
   unprocessableEntityError,
+  tooEarly,
 };
