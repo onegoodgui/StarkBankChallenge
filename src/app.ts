@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 import router from "./routers/index.js";
 import "express-async-errors";
 
-import { connectRedis } from "./config/redisConfig.js";
-import { webhookConfig } from "./services/webhookService.js";
+import { connectRedis, disconnectRedis } from "./config/redisConfig.js";
 
 dotenv.config();
 
@@ -15,17 +14,13 @@ app.use(express.raw({ type: "*/*" }));
 
 app.use(router);
 
-await webhookConfig("ngrok");
-
-const PORT = process.env.PORT || 4000;
-
-export function init(): Promise<Express> {
-  connectRedis();
+export async function init(): Promise<Express> {
+  await connectRedis();
   return Promise.resolve(app);
 }
 
-init().then(() => {
-  app.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`);
-  });
-});
+export async function close(): Promise<void> {
+  await disconnectRedis();
+}
+
+export default app;

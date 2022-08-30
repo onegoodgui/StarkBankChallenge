@@ -5,8 +5,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.ts",
+    "test": "jest --passWithNoTests --runInBand --detectOpenHandles",
+    "start": "nodemon src/server.ts",
     "keys": "ts-node src/keys.ts",
     "playground": "ts-node src/playground.ts"
   },
@@ -20,10 +20,12 @@
     "dotenv-cli": "^6.0.0",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "jest": "^28.0.0",
     "joi": "^17.6.0",
     "ngrok": "^4.3.3",
     "redis": "^4.3.0",
     "starkbank": "^2.12.0",
+    "supertest": "^6.2.4",
     "ts-node": "^10.9.1",
     "uuid": "^8.3.2"
   },
@@ -31,8 +33,11 @@
     "@faker-js/faker": "^7.4.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.0.0",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "nodemon": "^2.0.19",
+    "ts-jest": "^28.0.8",
     "typescript": "^4.7.4"
   }
 }

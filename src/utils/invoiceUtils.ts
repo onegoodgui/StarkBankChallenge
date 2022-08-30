@@ -24,9 +24,10 @@ async function processStatus() {
       await redisClient.set("funcStart", new Date().getTime().toString());
       return "starting";
     } else {
-      return `Still ${
-        (1000 * 60 * 60 * 24 - (now - init)) / (1000 * 60)
-      } minutes left before execution runs out`;
+      return `Still ${(
+        (1000 * 60 * 60 * 24 - (now - init)) /
+        (1000 * 60)
+      ).toFixed(0)} minutes left before execution runs out`;
     }
   }
 }
