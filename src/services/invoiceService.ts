@@ -44,7 +44,7 @@ async function invoiceSender(interval: number, limit: number) {
   }, interval);
 }
 
-async function invoiceSenderStatus(res: Response) {
+async function invoiceSenderStatus() {
   const status = await processStatus();
   try {
     if (status === "starting") {
@@ -53,8 +53,7 @@ async function invoiceSenderStatus(res: Response) {
       throw errorTypes.tooEarly(status);
     }
   } catch (err) {
-    res.status(serviceErrorToStatusCode[err.type]).send(err.message);
-    return false;
+    return err;
   }
 }
 
